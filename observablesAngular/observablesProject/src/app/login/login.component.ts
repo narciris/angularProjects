@@ -17,20 +17,28 @@ export class LoginComponent {
 
   }
 
-  login(){
-    this.auth.login({email : this.email, password: this.password})
-    .subscribe({
+  login() {
+    this.auth.login({ email: this.email, password: this.password }).subscribe({
       next: (response) => {
-        if(response.success){
+        if (response.accessToken && response.refreshToken) {
+          // localStorage.setItem('accessToken', response.accessToken);
+          // localStorage.setItem('refreshToken', response.refreshToken);
+  
           this.router.navigate(['/characters']);
-        } else{
-          this.error = "correo o contraseña incorrectos";
+        } else {
+          this.error = 'Respuesta inválida del servidor.';
         }
       },
-      error : ()=> {
-        this.error = "error al conectar con el servidor";
+      error: (err) => {
+        console.log(err);
+        if (err.status === 401) {
+          this.error = 'Correo o contraseña incorrectos.';
+        } else {
+          this.error = 'Error al conectar con el servidor.';
+        }
       }
     });
   }
+  
 
 }
