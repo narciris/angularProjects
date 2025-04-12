@@ -1,0 +1,20 @@
+<div class="container">
+    <h2 class="text-center my-4">Characters RickAndMorty</h2>
+    <p *ngIf="characters.length">......Cargando personajes</p>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" *ngFor=" let character of characters">
+        <div class="card h-100" style="width: 100%;">
+          <img class="card-img-top"  [src]="character.image">
+          <div class="card-body text-center">
+            <h3 class="card-title">{{character.name}}</h3>
+            <p class="card-text">
+             {{character.species}}
+            </p>
+            <p>{{character.gender}}</p>
+            <p>{{character.status}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
